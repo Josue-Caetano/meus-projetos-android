@@ -1,0 +1,52 @@
+plugins {
+    id 'com.android.application'
+}
+
+// No GitHub Actions cada compilação ganha um número maior, para o Android aceitar a atualização.
+def numeroDaVersao = (System.getenv('GITHUB_RUN_NUMBER') ?: '1').toInteger()
+
+android {
+    namespace 'com.servidorandroid.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.servidorandroid.app'
+        minSdk 24
+        targetSdk 34
+        versionCode numeroDaVersao
+        versionName "1.0.${numeroDaVersao}"
+    }
+
+    // A chave de assinatura NÃO fica no repositório.
+    // Se as variáveis abaixo existirem (ex.: segredos do GitHub Actions), o APK é assinado com elas;
+    // senão, usa a chave de depuração padrão do Android.
+    def chave = System.getenv('KEYSTORE_FILE')
+    def temChave = chave != null && file(chave).exists()
+
+    signingConfigs {
+        if (temChave) {
+            fixa {
+                storeFile file(chave)
+                storePassword System.getenv('KEYSTORE_PASSWORD')
+                keyAlias System.getenv('KEY_ALIAS')
+                keyPassword System.getenv('KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig temChave ? signingConfigs.fixa : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
+    }
+}
