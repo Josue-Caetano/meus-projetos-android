@@ -1,7 +1,16 @@
-# 📱 Meus Projetos — servidor de projetos para Android
+# 📱 Meus Projetos — servidor local para Android
 
-App Android (APK) para **abrir e testar seus projetos web direto no celular**, sem
-Termux e sem precisar do PC ligado.
+Um **servidor local no celular**, parecido com o Live Server, para **testar projetos web direto no
+Android, sem computador e sem internet**.
+
+Para que serve: quando quero ver como um projeto web fica e funciona no celular, baixo o projeto
+(em ZIP, pelo GitHub ou de uma pasta), abro no app e ele roda na hora, offline, com console de erros
+para achar problemas.
+
+<p>
+  <img src="docs/android-lista.jpg" alt="Tela inicial do app com a lista de projetos" width="260">
+  <img src="docs/android-console.jpg" alt="Site de exemplo aberto no app, com o console de erros" width="260">
+</p>
 
 ## Baixar e instalar
 
@@ -12,8 +21,9 @@ Termux e sem precisar do PC ligado.
 3. Se aparecer o aviso do Play Protect, toque em **"Mais detalhes" → "Instalar mesmo assim"**
    (o aviso aparece em todo app que não vem da Play Store).
 
-O APK é gerado automaticamente pelo GitHub Actions a cada alteração no código.
-Para atualizar o app, é só baixar e instalar de novo: seus projetos são mantidos.
+O instalador do app (o arquivo APK) é compilado automaticamente pelo GitHub Actions sempre que o
+código do app muda. Se o Android não deixar instalar uma versão nova por cima da antiga, desinstale a
+anterior antes.
 
 ## Como usar
 
